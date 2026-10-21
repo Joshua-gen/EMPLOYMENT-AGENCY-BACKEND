@@ -75,6 +75,12 @@ class EmployerService
                 );
             }
 
+            if ($employer->manpower_requests_count > 0) {
+                return QueryResultHelper::onCustomError(
+                    "Cannot delete \"{$employer->name}\": it has {$employer->manpower_requests_count} manpower request(s)."
+                );
+            }
+
             $this->employerRepository->delete($employer);
 
             return QueryResultHelper::onSuccessDelete();

@@ -251,7 +251,6 @@ class EmployerSeeder extends Seeder
             }
 
             $employerData['business_category_id'] = $category->id;
-            $employerData['business_category_name'] = $category->name;
 
             Employer::updateOrCreate(
                 ['name' => $employerData['name']],

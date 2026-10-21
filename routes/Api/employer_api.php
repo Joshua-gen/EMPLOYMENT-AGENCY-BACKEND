@@ -7,6 +7,9 @@ use App\Http\Controllers\Api\Management\JobController;
 use App\Http\Controllers\Api\Website\ApplicationController;
 use App\Http\Controllers\Api\Management\BusinessCategoryController;
 use App\Http\Controllers\Api\Website\JobController as WebsiteJobController;
+use App\Http\Controllers\Api\Management\ManpowerRequestController;
+use App\Http\Controllers\Api\Website\ManpowerRequestController as WebsiteManpowerRequestController;
+use App\Http\Controllers\Api\Website\DeploymentMapController;
 use Illuminate\Support\Facades\Route;
 
 // ========================================
@@ -21,6 +24,12 @@ Route::prefix('website')->group(function () {
 
     Route::post('applications', [ApplicationController::class, 'store'])
         ->middleware('throttle:10,1');
+
+    Route::get('business-categories', [BusinessCategoryController::class, 'index']);
+
+    Route::post('manpower-requests', [WebsiteManpowerRequestController::class, 'store'])->middleware('throttle:5,10');
+    Route::get('deployment-map', [DeploymentMapController::class, 'index']
+);
 });
 
 // ========================================
@@ -52,6 +61,15 @@ Route::middleware('auth:sanctum')
         Route::patch('applicants/{id}/assign-employer', [ApplicantController::class, 'assignEmployer']);
 
         Route::get('business-categories', [BusinessCategoryController::class, 'index']);
+
+        Route::get('manpower-requests/summary', [ManpowerRequestController::class, 'summary']);
+        Route::apiResource('manpower-requests', ManpowerRequestController::class)
+            ->only(['index', 'show'])
+            ->parameters(['manpower-requests' => 'id']);
+        Route::patch('manpower-requests/{id}/approve', [ManpowerRequestController::class, 'approve']);
+        Route::patch('manpower-requests/{id}/reject', [ManpowerRequestController::class, 'reject']);
+        Route::patch('manpower-requests/{id}/positions/{position}/link-job', [ManpowerRequestController::class, 'linkJob']);
+        Route::delete('manpower-requests/{id}/positions/{position}/link-job', [ManpowerRequestController::class, 'unlinkJob']);
     });
 
 // ========================================

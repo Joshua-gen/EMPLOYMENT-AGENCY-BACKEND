@@ -5,6 +5,7 @@ namespace App\Models\Management;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Employer extends Model
 {
@@ -34,5 +35,10 @@ class Employer extends Model
     {
         return $this->belongsToMany(JobOpening::class, 'employer_job_opening', 'employer_id', 'job_opening_id')
             ->withTimestamps();
+    }
+
+    public function manpowerRequests(): HasMany
+    {
+        return $this->hasMany(ManpowerRequest::class, 'employer_id');
     }
 }

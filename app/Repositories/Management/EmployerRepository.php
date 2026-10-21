@@ -15,7 +15,7 @@ class EmployerRepository
 
         return Employer::query()
             ->with('businessCategory')
-            ->withCount('jobOpenings')
+            ->withCount(['jobOpenings', 'manpowerRequests'])
             ->when($search !== '', function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
@@ -33,7 +33,7 @@ class EmployerRepository
     public function find(int $id)
     {
         return Employer::with(['businessCategory', 'jobOpenings'])
-            ->withCount('jobOpenings')
+            ->withCount(['jobOpenings', 'manpowerRequests'])
             ->find($id);
     }
 

@@ -18,7 +18,7 @@ return new class extends Migration
                 ->constrained('business_categories')
                 ->restrictOnDelete();
 
-            $table->string('business_category_name');
+           // $table->string('business_category_name');
 
             $table->string('country')->index();
             $table->text('address');
