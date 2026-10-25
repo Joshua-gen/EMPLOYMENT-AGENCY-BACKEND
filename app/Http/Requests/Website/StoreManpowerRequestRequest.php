@@ -58,6 +58,10 @@ class StoreManpowerRequestRequest extends FormRequest
             'positions.*.position'        => 'required|string|max:255|distinct:ignore_case',
             'positions.*.number_required' => 'required|integer|min:1|max:10000',
             'positions.*.description'     => 'required|string|max:2000',
+            'g_recaptcha_response' => [
+                'required',
+                'string',
+            ],
         ];
     }
 
@@ -76,6 +80,7 @@ class StoreManpowerRequestRequest extends FormRequest
             'positions.*.position'        => 'position',
             'positions.*.number_required' => 'number required',
             'positions.*.description'     => 'job description',
+            'g_recaptcha_response'        => 'reCAPTCHA verification',
         ];
     }
 
