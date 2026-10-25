@@ -100,6 +100,10 @@ class StoreApplicationRequest extends FormRequest
             'valid_id'           => 'required|file|mimes:jpg,jpeg,png,pdf|max:5120',
             'passport'           => 'required|file|mimes:jpg,jpeg,png,pdf|max:5120',
             'other_requirements' => 'nullable|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:5120',
+            'g_recaptcha_response' => [
+                'required',
+                'string',
+            ],
         ];
     }
 
@@ -119,6 +123,7 @@ class StoreApplicationRequest extends FormRequest
             'work_end'                  => 'end date',
             'valid_id'                  => 'valid ID',
             'other_requirements'        => 'other requirements',
+            'g_recaptcha_response'      => 'reCAPTCHA verification',
         ];
     }
 

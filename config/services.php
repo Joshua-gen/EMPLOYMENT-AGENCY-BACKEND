@@ -38,6 +38,9 @@ return [
         'verify_token' => env('MESSENGER_VERIFY_TOKEN'),
         'app_secret' => env('MESSENGER_APP_SECRET'),
     ],
+    'recaptcha' => [
+        'secret_key' => env('RECAPTCHA_SECRET_KEY'),
+    ],
 
 
 ];
